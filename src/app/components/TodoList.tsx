@@ -11,9 +11,11 @@ const TodoList = () => {
   const [newTaskValue, setNewTaskValue] = useState<string>("");
 
   var tasksList:Task[] = [];
-  const [ todos , setTodos] = useState(tasksList);
 
-  const storage : string | null = localStorage.getItem("key");
+  var storage : string | null = null;
+  if (typeof window !== 'undefined') {
+    storage = localStorage.getItem('key')
+  }
 
   var valueObject:any = null;
 
@@ -24,6 +26,8 @@ const TodoList = () => {
 
   if(valueObject)
     tasksList = valueObject;
+
+  const [ todos , setTodos] = useState(tasksList);
 
     // Add taskボタン
     const handleSubmit = async (e: FormEvent) => {
